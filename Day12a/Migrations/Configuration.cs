@@ -57,7 +57,7 @@ namespace Day12a.Migrations
             var userManager = new ApplicationUserManager(userStore);
 
             // Ensure Stephen
-            var user = userManager.FindByName("Stephen.Walther@CoderCamps.com");
+            var user = userManager.FindByName("xondanish@charter.net");
             if (user == null)
             {
                 // create user

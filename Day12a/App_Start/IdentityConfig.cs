@@ -15,6 +15,8 @@ using SendGrid;
 using System.Net;
 using System.Net.Mail;
 using System.Configuration;
+using Twilio;
+using System.Diagnostics;
 
 namespace Day12a
 {
@@ -30,13 +32,18 @@ namespace Day12a
             myMessage.AddTo(message.Destination);
             //myMessage.From = new MailAddress("Stephen.Walther@CoderCamps.com", "Account Activation");
             myMessage.From = new MailAddress("rondanish@charter.net", "Account Activation");
+            //myMessage.From = new MailAddress("Stephen.Walther@CoderCamps.com", "Account Activation");
             myMessage.Subject = message.Subject;
             myMessage.Text = message.Body;
             myMessage.Html = message.Body;
 
             
+            //var password = ConfigurationManager.AppSettings["sendGridPassword"];
+            //var credentials = new NetworkCredential("RonCoderCamps-Email", password)l
+
             var password = ConfigurationManager.AppSettings["sendGridPassword"];
-            var credentials = new NetworkCredential("RonCoderCamps-email", password);
+            var credentials = new NetworkCredential("StephenCoderCamps-Email", password);
+
 
             //var credentials = new NetworkCredential("StephenCoderCamps", "SecretPassword");
             // Create a Web transport for sending email.
@@ -53,15 +60,26 @@ namespace Day12a
         }
     }
 
+    //public class SmsService : IIdentityMessageService
+    //{
+    //    public Task SendAsync(IdentityMessage message)
+    //    {
+    //        // Plug in your SMS service here to send a text message.
+    //        return Task.FromResult(0);
+    //    }
+    //}
     public class SmsService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
         {
+            var Twilio = new TwilioRestClient("AC5feb7128eb1ae441402b2fb4fd6f9e5d", "6ef75c3ffc34f0d6cbdd250d0c84036e");
+            var result = Twilio.SendMessage("(775) 636-9188", message.Destination, message.Body);
+            // Status is one of Queued, Sending, Sent, Failed or null if the number is not valid
+            Trace.WriteLine(result.Status);
             // Plug in your SMS service here to send a text message.
             return Task.FromResult(0);
         }
     }
-
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
