@@ -13,6 +13,8 @@ using Microsoft.Owin.Security;
 using Day12a.Models;
 using SendGrid;
 using System.Net;
+using System.Net.Mail;
+using System.Configuration;
 
 namespace Day12a
 {
@@ -26,11 +28,17 @@ namespace Day12a
         {
             var myMessage = new SendGridMessage();
             myMessage.AddTo(message.Destination);
-            myMessage.From = new MailAddress("Stephen.Walther@CoderCamps.com", "Account Activation");
+            //myMessage.From = new MailAddress("Stephen.Walther@CoderCamps.com", "Account Activation");
+            myMessage.From = new MailAddress("rondanish@charter.net", "Account Activation");
             myMessage.Subject = message.Subject;
             myMessage.Text = message.Body;
             myMessage.Html = message.Body;
-            var credentials = new NetworkCredential("StephenCoderCamps", "SecretPassword");
+
+            
+            var password = ConfigurationManager.AppSettings["sendGridPassword"];
+            var credentials = new NetworkCredential("RonCoderCamps-email", password);
+
+            //var credentials = new NetworkCredential("StephenCoderCamps", "SecretPassword");
             // Create a Web transport for sending email.
             var transportWeb = new Web(credentials);
             // Send the email.

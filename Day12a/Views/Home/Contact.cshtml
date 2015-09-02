@@ -6,7 +6,9 @@
 
 @if (ClaimsHelper.IsAdmin())
 {
-    <div>Admin</div>
+    <div>
+        <h1>Located the CanEditProducts claim</h1>
+    </div>
 }
 
 <address>
@@ -21,8 +23,9 @@
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
 
-@if (User.Identity.IsAuthenticated) { 
-<div>
-    <h1> Here is the  Secret Info</h1>
-</div>
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <h1> Here is the  Secret Info</h1>
+    </div>
 }
