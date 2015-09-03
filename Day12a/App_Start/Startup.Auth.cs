@@ -54,9 +54,9 @@ namespace Day12a
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: "5yWinSu6IQFmaVEgtbbXOdFMX",
+               consumerSecret: "LK5fXCQd5juMOx6XoWiMdv3fjuxAxNUM76QXLh9weKjJBAasUG");
 
             //app.UseFacebookAuthentication(
             //   appId: "",
